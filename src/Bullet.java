@@ -6,14 +6,14 @@ public class Bullet {
     float x, y;
     GLZylinder body;
     GLKegel tip;
-    boolean ship;
+    boolean owner;
 
-    public Bullet(float pX, float pY, boolean pShip) {
-        //ship = true -> Your shot
-        //ship = false -> enemy shot
+    public Bullet(float pX, float pY, boolean pOwner) {
+        //owner = true -> Your shot
+        //owner = false -> enemy shot
         this.x = pX;
         this.y = pY;
-        this.ship = pShip;
+        this.owner = pOwner;
 
         body = new GLZylinder(x, y, 0, 2, 8);
         tip = new GLKegel(x+6.5, y,0,2,5);
@@ -21,12 +21,12 @@ public class Bullet {
         body.drehe(0,270,0);
         tip.drehe(0,270,0);
 
-        colour(ship);
+        colour();
 
     }
 
-    private void colour(boolean ship) {
-        if (ship) {
+    private void colour() {
+        if (this.getOwner()) {
             this.body.setzeFarbe(255, 22, 12);
             this.tip.setzeFarbe(255,22,12);
         }
@@ -35,5 +35,18 @@ public class Bullet {
             this.tip.setzeFarbe(57, 255, 20);
         }
         //TODO: Correct colors, not applied correctly at the moment
+    }
+
+    public void move() {
+        if (this.getOwner()) this.verschiebe(5);
+        else this.verschiebe(-5);
+    }
+
+    public float getX() {return this.x;}
+    public boolean getOwner() {return this.owner;}
+
+    public void verschiebe(float pX) {
+        body.verschiebe(pX, 0, 0);
+        tip.verschiebe(pX, 0, 0);
     }
 }

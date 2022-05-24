@@ -6,7 +6,6 @@ public class Ship {
     boolean up;
     GLZylinder body, cannon1, cannon2, cannonarm_1, cannonarm_2;
     GLKegel tip;
-    Bullet[] ammo;
 
     public static void main(String[] args) {
         GLLicht licht = new GLLicht();
@@ -18,7 +17,6 @@ public class Ship {
         this.y = pY;
         this.z = pZ;
         this.hp = pHP;
-        this.ammo = new Bullet[10];
 
         body = new GLZylinder(pX,pY,pZ,10,50);
         tip = new GLKegel(40+pX,pY,pZ,10,30);
@@ -55,14 +53,13 @@ public class Ship {
     public float getLeft() {return getX()-26;}
     public float getRight() {return getX()+56;}
 
-    public void shoot() {
-        System.out.println("Pew");
+    public void shoot(Bullet[] ammo) {
         for (int i=0; i<ammo.length; i++) {
             if (ammo[i] == null) {
                 if (up) ammo[i] = new Bullet(cannon1.gibX(), cannon1.gibY(), true);
                 else ammo[i] = new Bullet(cannon2.gibX(), cannon2.gibY(), true);
-                System.out.println("Created");
                 Sys.warte(50);
+                up = !up;
                 return;
             }
         }
