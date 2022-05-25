@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         setup();
         GLQuader test = new GLQuader(300, 0, 0, 5, 5, 5);
+        GLQuader left = new GLQuader(-300,0,0,5,5,5);
         while (ship.getHP()>0) {
             ship_move();
             if (kb.shift()) ship.shoot(bullets[0]);
@@ -36,18 +37,23 @@ public class Main {
 
         bullets = new Bullet[10][];
         bullets[0] = new Bullet[10];
-        for (int i=1; i<bullets.length; i++) bullets[i] = new Bullet[3];
+        for (int i=0; i<bullets[0].length; i++) bullets[0][i] = new Bullet(-2000, 0, true, false);
+        for (int i=1; i<bullets.length; i++) {
+            bullets[i] = new Bullet[3];
+            for (int j=0; j<bullets[i].length; j++) bullets[i][j] = new Bullet(-2000, 0, false, false);
+        }
     }
 
     public static void bullet_move() {
-        for (int i=0; i<bullets.length; i++) {
-            if (bullets[i] != null) {
-                for (int j=0; j<bullets[i].length; j++) {
-                    if (bullets[i][j] != null) {
-                        bullets[i][j].move();
-                        if (bullets[i][j].getX()>300 || bullets[i][j].getX()<-300) bullets[i][j] = null;
-                        //TODO: Bullets aren't getting deleted at all, so the player only has a magazine size of 10
+        for (Bullet[] bullet : bullets) {
+            for (Bullet value : bullet) {
+                if (value.getActive()) {
+                    value.move();
+                    if (value.getX() > 300 || value.getX() < -300) {
+                        value.setzePosition(-2000,0);
+                        value.setActive(false);
                     }
+                    //TODO: Bullets don't work at all anymore
                 }
             }
         }

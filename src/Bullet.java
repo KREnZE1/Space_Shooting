@@ -6,14 +6,15 @@ public class Bullet {
     float x, y;
     GLZylinder body;
     GLKegel tip;
-    boolean owner;
+    boolean owner, active;
 
-    public Bullet(float pX, float pY, boolean pOwner) {
+    public Bullet(float pX, float pY, boolean pOwner, boolean pActive) {
         //owner = true -> Your shot
         //owner = false -> enemy shot
         this.x = pX;
         this.y = pY;
         this.owner = pOwner;
+        this.active = pActive;
 
         body = new GLZylinder(x, y, 0, 2, 8);
         tip = new GLKegel(x+6.5, y,0,2,5);
@@ -44,9 +45,16 @@ public class Bullet {
 
     public float getX() {return this.x;}
     public boolean getOwner() {return this.owner;}
+    public boolean getActive() {return this.active;}
+    public void setActive(boolean pActive) {this.active = pActive;}
 
     public void verschiebe(float pX) {
         body.verschiebe(pX, 0, 0);
         tip.verschiebe(pX, 0, 0);
+    }
+
+    public void setzePosition(float pX, float pY) {
+        body.setzePosition(pX, pY, 0);
+        tip.setzePosition(pX, pY,0);
     }
 }

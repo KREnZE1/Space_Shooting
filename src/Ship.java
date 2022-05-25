@@ -54,12 +54,13 @@ public class Ship {
     public float getRight() {return getX()+56;}
 
     public void shoot(Bullet[] ammo) {
-        for (int i=0; i<ammo.length; i++) {
-            if (ammo[i] == null) {
-                if (up) ammo[i] = new Bullet(cannon1.gibX(), cannon1.gibY(), true);
-                else ammo[i] = new Bullet(cannon2.gibX(), cannon2.gibY(), true);
+        for (Bullet bullet : ammo) {
+            if (!bullet.getActive()) {
+                if (up) bullet.setzePosition(cannon1.gibX(), cannon1.gibY());
+                else bullet.setzePosition(cannon2.gibX(), cannon2.gibY());
                 Sys.warte(50);
                 up = !up;
+                bullet.setActive(true);
                 return;
             }
         }
