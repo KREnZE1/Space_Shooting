@@ -51,10 +51,12 @@ public class Bullet {
     public void verschiebe(float pX) {
         body.verschiebe(pX, 0, 0);
         tip.verschiebe(pX, 0, 0);
+        //relative Änderung der Position
     }
 
     public void setzePosition(float pX, float pY) {
         body.setzePosition(pX, pY, 0);
         tip.setzePosition(pX, pY,0);
+        //Absolute Veränderung der Position
     }
 }
