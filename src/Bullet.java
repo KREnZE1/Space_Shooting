@@ -28,8 +28,8 @@ public class Bullet {
 
     private void colour() {
         if (this.getOwner()) {
-            this.body.setzeFarbe(255, 22, 12);
-            this.tip.setzeFarbe(255,22,12);
+            body.setzeFarbe(255, 22, 12);
+            tip.setzeFarbe(255,22,12);
         }
         else {
             this.body.setzeFarbe(57,255,20);
@@ -44,6 +44,8 @@ public class Bullet {
     }
 
     public float getX() {return this.x;}
+    public void changeX(float pX) {this.x += pX;}
+    public void setX(float pX) {this.x = pX;}
     public boolean getOwner() {return this.owner;}
     public boolean getActive() {return this.active;}
     public void setActive(boolean pActive) {this.active = pActive;}
@@ -51,10 +53,12 @@ public class Bullet {
     public void verschiebe(float pX) {
         body.verschiebe(pX, 0, 0);
         tip.verschiebe(pX, 0, 0);
+        this.changeX(pX);
     }
 
     public void setzePosition(float pX, float pY) {
         body.setzePosition(pX, pY, 0);
         tip.setzePosition(pX, pY,0);
+        this.setX(pX);
     }
 }

@@ -7,6 +7,13 @@ public class Testing{
 
         Bullet ammo = new Bullet(0,0, true, true);
         Bullet ammo1 = new Bullet(0,30,false, false);
-        //while (true) {Main.bullet_move();}
+        GLQuader right = new GLQuader(300, 0, 0, 5, 5, 5);
+        GLQuader left = new GLQuader(-300,0,0,5,5,5);
+
+        Sys.warte(5000);
+        while (true) {
+            Main.bullet_move(ammo);
+            Main.bullet_move(ammo1);
+        }
     }
 }

@@ -10,12 +10,16 @@ public class Main {
 
     public static void main(String[] args) {
         setup();
-        GLQuader test = new GLQuader(300, 0, 0, 5, 5, 5);
+        GLQuader right = new GLQuader(300, 0, 0, 5, 5, 5);
         GLQuader left = new GLQuader(-300,0,0,5,5,5);
         while (ship.getHP()>0) {
             ship_move();
             if (kb.shift()) ship.shoot(bullets[0]);
-            bullet_move();
+            for (Bullet[] magazine : bullets) {
+                for (Bullet ammo : magazine) {
+                    bullet_move(ammo);
+                }
+            }
         }
     }
 
@@ -44,18 +48,15 @@ public class Main {
         }
     }
 
-    public static void bullet_move() {
-        for (Bullet[] bullet : bullets) {
-            for (Bullet value : bullet) {
-                if (value.getActive()) {
-                    value.move();
-                    if (value.getX() > 300 || value.getX() < -300) {
-                        value.setzePosition(-2000,0);
-                        value.setActive(false);
-                    }
-                    //TODO: Bullets don't work at all anymore
-                }
+    public static void bullet_move(Bullet ammo) {
+        if (ammo.getActive()) {
+            ammo.move();
+            System.out.println(ammo.getX());
+            if (ammo.getX() > 300 || ammo.getX() < -300) {
+                ammo.setzePosition(-2000, 0);
+                ammo.setActive(false);
             }
+            //TODO: Bullets don't work at all anymore
         }
     }
 }
