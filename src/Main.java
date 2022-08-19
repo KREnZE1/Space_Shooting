@@ -24,8 +24,8 @@ public class Main {
     }
 
     private static void ship_move() {
-        /**
-         * depending on the keyboard input the player character moves in the fitting direction
+        /*
+          depending on the keyboard input the player character moves in the fitting direction
          */
 
         if (kb.rechts()) ship.verschiebe(5, 0);
@@ -36,7 +36,7 @@ public class Main {
     }
 
     public static void setup() {
-        /**
+        /*
          * initialises all objects to their start values
          */
 
@@ -53,7 +53,7 @@ public class Main {
         for (int i=0; i<bullets[0].length; i++) bullets[0][i] = new Bullet(-2000, 0, true, false); //fills the player magazine with inactive bullets
         for (int i=1; i<bullets.length; i++) {
             bullets[i] = new Bullet[3]; //a magazine for an enemy is created
-            for (int j=0; j<bullets[i].length; j++) bullets[i][j] = new Bullet(-2000, 0, false, false); and then filled with inactive bullets
+            for (int j=0; j<bullets[i].length; j++) bullets[i][j] = new Bullet(-2000, 0, false, false); //and then filled with inactive bullets
         }
     }
 
